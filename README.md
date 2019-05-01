@@ -5,19 +5,19 @@ Dithering Algorithms for Julia
 `julia> using Ditherings`
 
 ---
-## Simple Reduced Precision Colour
+#### Simple Reduced Precision Colour
 `julia> img = load("lenna.png");`
 
 ![alt text](https://github.com/NTimmons/Ditherings/blob/master/docs/Lenna.png?raw=true)
 
 ---
-## Switch to zero or one per pixel
+#### Switch to zero or one per pixel
 `julia> Ditherings.FloydSteinbergDither4Sample(img, Ditherings.ZeroOne)`
 
 ![alt text](https://github.com/NTimmons/Ditherings/blob/master/docs/FS12_01.png?raw=true)
 
 ---
-## Switch to zero or one per channel
+#### Switch to zero or one per channel
 `julia> Ditherings.FloydSteinbergDither4Sample(img, Ditherings.ZeroOne_PerChannel)`
 
 ![alt text](https://github.com/NTimmons/Ditherings/blob/master/docs/FS12_01PerChannel.png?raw=true)
