@@ -97,4 +97,44 @@ function FloydSteinbergDither12Sample(_img, PaletteFunction, weights = [0.243228
     newimg
 end
 
+function HorizontalDither3Sample(_img, PaletteFunction, weights=[0.5,0.4,0.1]) 
+    width, height = size(_img);
+    inputtype = typeof(_img)
+    newimg = RGB{Float64}.(_img)
+
+    for y in 2:height-3
+        for x in 2:width-3
+            oldpix = newimg[x,y]
+            newpix = PaletteFunction(oldpix)
+            newimg[x,y] = newpix
+            quant_error = oldpix - newpix
+            newimg[x+1,y  ] = newimg[x+1,y  ] + (quant_error * weights[1])
+            newimg[x+2,y  ] = newimg[x+2,y  ] + (quant_error * weights[2])
+            newimg[x+3,y  ] = newimg[x+3,y  ] + (quant_error * weights[3])
+        end
+    end
+    
+    newimg
+end
+
+function VerticalDither3Sample(_img, PaletteFunction, weights=[0.5,0.4,0.1]) 
+    width, height = size(_img);
+    inputtype = typeof(_img)
+    newimg = RGB{Float64}.(_img)
+
+    for y in 2:height-3
+        for x in 2:width-3
+            oldpix = newimg[x,y]
+            newpix = PaletteFunction(oldpix)
+            newimg[x,y] = newpix
+            quant_error = oldpix - newpix
+            newimg[x,y+1  ] = newimg[x,y+1  ] + (quant_error * weights[1])
+            newimg[x,y+2  ] = newimg[x,y+2  ] + (quant_error * weights[2])
+            newimg[x,y+3  ] = newimg[x,y+3  ] + (quant_error * weights[3])
+        end
+    end
+    
+    newimg
+end
+
 end
